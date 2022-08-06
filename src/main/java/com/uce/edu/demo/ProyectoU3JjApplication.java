@@ -9,7 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Factura;
+import com.uce.edu.demo.repository.modelo.Habitacion;
 import com.uce.edu.demo.repository.modelo.Hotel;
 import com.uce.edu.demo.service.IFacturaService;
 import com.uce.edu.demo.service.IHotelService;
@@ -31,43 +31,38 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		LOG.info("INNER JOIN");
-		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaInnerJoin(5);
+		LOG.info("RELACIONAMIENTO WHERE");
+		List<Hotel> listaHoteles =this.iHotelService.buscarHotelJoinWhere("Familiar");
 		
-		for (Factura f : listaFacturas) {
-			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
+		for (Hotel h : listaHoteles) {
+			LOG.info("Hotel : " + h.getNombre()+" "+h.getDireccion());
 		}
 		
-		List<Factura> listaFacturas2 =this.iFacturaService.buscarFacturaInnerJoin();
+		LOG.info("INNER JOIN EAGER/LAZY");
 		
-		for (Factura f : listaFacturas2) {
-			LOG.info("Factura 2: " + f.getNumero()+" "+f.getFecha());
+		List<Hotel> listaHotelesJoin =this.iHotelService.buscarHotelInnerJoin("Familiar");
+
+		for (Hotel h : listaHotelesJoin) {
+			LOG.info("Hotel 2: " + h.getNombre()+" "+h.getDireccion());
+			for(Habitacion ha :h.getHabitaciones()) {
+			
+			LOG.info("Habitacion 2: " +ha);
+			
+			}
 		}
 		
-		//Left
-		LOG.info("LEFT JOIN");
-		List<Factura> listaFacturasLeft =this.iFacturaService.buscarFacturaOuterJoinLeft(5);
+		LOG.info(" JOIN FETCH");
 		
-		for (Factura f : listaFacturasLeft) {
-			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
+		List<Hotel> listaHoteles2 =this.iHotelService.buscarHotelJoinFetch("Familiar");
+
+		for (Hotel h : listaHoteles2) {
+			LOG.info("Hotel 3: " + h.getNombre()+" "+h.getDireccion());
+			for(Habitacion ha :h.getHabitaciones()) {
+			
+			LOG.info("Habitacion 3: " +ha);
+			
+			}
 		}
-		
-		List<Factura> listaHotelesLeft2 =this.iFacturaService.buscarFacturaOuterJoinLeft();
-		
-		for (Factura f : listaHotelesLeft2) {
-			LOG.info("Factura 2: " + f.getNumero()+" "+f.getFecha());
-		}
-		
-		//Right
-		LOG.info("RIGHT JOIN");
-		List<Factura> listaHotelesRight =this.iFacturaService.buscarFacturaOuterJoinRight(5);
-		
-		for (Factura f : listaHotelesRight) {
-			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
-		}
-		
-		
-		
 		
 	}
 

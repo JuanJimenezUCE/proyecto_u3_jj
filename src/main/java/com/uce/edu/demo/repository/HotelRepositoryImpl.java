@@ -1,5 +1,6 @@
 package com.uce.edu.demo.repository;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,11 +21,32 @@ public class HotelRepositoryImpl implements IHotelRepository{
 	@Override
 	public List<Hotel> buscarHotelInnerJoin(String tipoHabitacion) {
 		// TODO Auto-generated method stub
+		//TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  FULLER h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
+		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  JOIN h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
+		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
+		
+		List<Hotel> hoteles = myQuery.getResultList();
+		for (Hotel h : hoteles) {
+			h.getHabitaciones().size();
+		}
+
+		return hoteles;
+	}
+	
+	public List<Hotel> buscarHotelInnerJoin2(String tipoHabitacion) {
+		// TODO Auto-generated method stub
 		
 		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  JOIN h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
 		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
+		
+		List<Hotel> hoteles = myQuery.getResultList();
+		for (Hotel h : hoteles) {
+			h.getHabitaciones().size();
+		}
+
 		return myQuery.getResultList();
 	}
+	
 	
 	@Override
 	public List<Hotel> buscarHotelInnerJoin() {
@@ -61,13 +83,23 @@ public class HotelRepositoryImpl implements IHotelRepository{
 	@Override
 	public List<Hotel> buscarHotelJoinWhere(String tipoHabitacion) {
 		// TODO Auto-generated method stub
-		return null;
+		
+	
+		
+		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h, Habitacion ha WHERE h.id= ha.hotel AND ha.tipo =:tipoHabitacion",Hotel.class);
+		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
+		return myQuery.getResultList();
 	}
+	
 
 	@Override
 	public List<Hotel> buscarHotelJoinFetch(String tipoHabitacion) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  JOIN FETCH h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
+		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
+		
+		return myQuery.getResultList();
 	}
 
 
