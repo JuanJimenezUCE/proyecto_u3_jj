@@ -1,6 +1,5 @@
 package com.uce.edu.demo.repository;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,7 +23,7 @@ public class HotelRepositoryImpl implements IHotelRepository{
 		//TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  FULLER h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
 		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h  JOIN h.habitaciones ha WHERE ha.tipo =: tipoHabitacion",Hotel.class);
 		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
-		
+		//Bajo demanda
 		List<Hotel> hoteles = myQuery.getResultList();
 		for (Hotel h : hoteles) {
 			h.getHabitaciones().size();
@@ -86,7 +85,7 @@ public class HotelRepositoryImpl implements IHotelRepository{
 		
 	
 		
-		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h, Habitacion ha WHERE h.id= ha.hotel AND ha.tipo =:tipoHabitacion",Hotel.class);
+		TypedQuery<Hotel> myQuery=this.entityManager.createQuery("SELECT h FROM Hotel h, Habitacion ha WHERE  h.id= ha.hotel AND ha.tipo =:tipoHabitacion",Hotel.class);
 		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
 		return myQuery.getResultList();
 	}

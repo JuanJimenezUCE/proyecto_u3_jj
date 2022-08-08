@@ -9,8 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.Habitacion;
-import com.uce.edu.demo.repository.modelo.Hotel;
+import com.uce.edu.demo.repository.modelo.DetalleFactura;
+import com.uce.edu.demo.repository.modelo.Factura;
 import com.uce.edu.demo.service.IFacturaService;
 import com.uce.edu.demo.service.IHotelService;
 
@@ -31,6 +31,30 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		
+		LOG.info("RELACIONAMIENTO WHERE");
+		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaJoinWhere(5);
+		
+		for (Factura f : listaFacturas) {
+			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
+		}
+		
+
+		LOG.info(" JOIN FETCH");
+		
+		List<Factura> listaFacturas2 =this.iFacturaService.buscarFacturaJoinFetch(5);
+
+		for (Factura f : listaFacturas2) {
+			LOG.info("Factura FETCH: " + f.getNumero()+" "+f.getFecha());
+			for(DetalleFactura de : f.getDetalles()) {
+			
+			LOG.info("Detalles : " +de);
+			
+			}
+		}
+		
+		
+		/*
 		LOG.info("RELACIONAMIENTO WHERE");
 		List<Hotel> listaHoteles =this.iHotelService.buscarHotelJoinWhere("Familiar");
 		
@@ -38,19 +62,7 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 			LOG.info("Hotel : " + h.getNombre()+" "+h.getDireccion());
 		}
 		
-		LOG.info("INNER JOIN EAGER/LAZY");
-		
-		List<Hotel> listaHotelesJoin =this.iHotelService.buscarHotelInnerJoin("Familiar");
 
-		for (Hotel h : listaHotelesJoin) {
-			LOG.info("Hotel 2: " + h.getNombre()+" "+h.getDireccion());
-			for(Habitacion ha :h.getHabitaciones()) {
-			
-			LOG.info("Habitacion 2: " +ha);
-			
-			}
-		}
-		
 		LOG.info(" JOIN FETCH");
 		
 		List<Hotel> listaHoteles2 =this.iHotelService.buscarHotelJoinFetch("Familiar");
@@ -63,6 +75,8 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 			
 			}
 		}
+		
+		*/
 		
 	}
 
