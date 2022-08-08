@@ -35,7 +35,7 @@ public class Factura {
 	@JoinColumn(name = "fact_clie_id")
 	private Cliente cliente;
 	*/
-	@OneToMany(mappedBy = "factura",fetch= FetchType.EAGER)
+	@OneToMany(mappedBy = "factura",fetch= FetchType.LAZY)
 	private List<DetalleFactura> detalles;
 
 	//GET Y SET

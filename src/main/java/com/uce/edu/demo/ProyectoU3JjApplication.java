@@ -69,8 +69,28 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
 		}
 		
+		/*
+		LOG.info("RELACIONAMIENTO WHERE");
+		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaJoinWhere(5);
 		
+		for (Factura f : listaFacturas) {
+			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
+		}
 		
+
+		LOG.info(" JOIN FETCH");
+		
+		List<Factura> listaFacturas2 =this.iFacturaService.buscarFacturaJoinFetch(5);
+
+		for (Factura f : listaFacturas2) {
+			LOG.info("Factura FETCH: " + f.getNumero()+" "+f.getFecha());
+			for(DetalleFactura de : f.getDetalles()) {
+			
+			LOG.info("Detalles : " +de);
+			
+			}
+		}
+		*/
 	}
 
 }
