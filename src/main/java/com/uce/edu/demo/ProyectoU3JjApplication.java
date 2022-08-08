@@ -31,52 +31,45 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+
 		
-		LOG.info("RELACIONAMIENTO WHERE");
-		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaJoinWhere(5);
+		
+		LOG.info("INNER JOIN");
+		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaInnerJoin(5);
 		
 		for (Factura f : listaFacturas) {
 			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
 		}
 		
-
-		LOG.info(" JOIN FETCH");
+		List<Factura> listaFacturas2 =this.iFacturaService.buscarFacturaInnerJoin();
 		
-		List<Factura> listaFacturas2 =this.iFacturaService.buscarFacturaJoinFetch(5);
-
 		for (Factura f : listaFacturas2) {
-			LOG.info("Factura FETCH: " + f.getNumero()+" "+f.getFecha());
-			for(DetalleFactura de : f.getDetalles()) {
-			
-			LOG.info("Detalles : " +de);
-			
-			}
+			LOG.info("Factura 2: " + f.getNumero()+" "+f.getFecha());
+		}
+		
+		//Left
+		LOG.info("LEFT JOIN");
+		List<Factura> listaFacturasLeft =this.iFacturaService.buscarFacturaOuterJoinLeft(5);
+		
+		for (Factura f : listaFacturasLeft) {
+			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
+		}
+		
+		List<Factura> listaHotelesLeft2 =this.iFacturaService.buscarFacturaOuterJoinLeft();
+		
+		for (Factura f : listaHotelesLeft2) {
+			LOG.info("Factura 2: " + f.getNumero()+" "+f.getFecha());
+		}
+		
+		//Right
+		LOG.info("RIGHT JOIN");
+		List<Factura> listaHotelesRight =this.iFacturaService.buscarFacturaOuterJoinRight(5);
+		
+		for (Factura f : listaHotelesRight) {
+			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
 		}
 		
 		
-		/*
-		LOG.info("RELACIONAMIENTO WHERE");
-		List<Hotel> listaHoteles =this.iHotelService.buscarHotelJoinWhere("Familiar");
-		
-		for (Hotel h : listaHoteles) {
-			LOG.info("Hotel : " + h.getNombre()+" "+h.getDireccion());
-		}
-		
-
-		LOG.info(" JOIN FETCH");
-		
-		List<Hotel> listaHoteles2 =this.iHotelService.buscarHotelJoinFetch("Familiar");
-
-		for (Hotel h : listaHoteles2) {
-			LOG.info("Hotel 3: " + h.getNombre()+" "+h.getDireccion());
-			for(Habitacion ha :h.getHabitaciones()) {
-			
-			LOG.info("Habitacion 3: " +ha);
-			
-			}
-		}
-		
-		*/
 		
 	}
 

@@ -41,7 +41,7 @@ public class FacturaServiceImpl implements IFacturaService{
 		// TODO Auto-generated method stub
 		return this.iFacturaRepository.buscarFacturaOuterJoinRight(cantidad);
 	}
-
+/*
 	@Override
 	public List<Factura> buscarFacturaJoinWhere(Integer cantidad) {
 		// TODO Auto-generated method stub
@@ -53,5 +53,5 @@ public class FacturaServiceImpl implements IFacturaService{
 		// TODO Auto-generated method stub
 		return this.iFacturaRepository.buscarFacturaJoinFetch(cantidad);
 	}
-
+*/
 }
