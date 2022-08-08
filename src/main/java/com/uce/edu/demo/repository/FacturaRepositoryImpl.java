@@ -62,7 +62,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		myQuery.setParameter("cantidad", cantidad);
 		return myQuery.getResultList();
 	}
-/*
+
 	@Override
 	public List<Factura> buscarFacturaJoinWhere(Integer cantidad) {
 		// TODO Auto-generated method stub
@@ -83,5 +83,5 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		myQuery.setParameter("cantidad", cantidad);
 		return myQuery.getResultList();
 	}
-*/
+
 }

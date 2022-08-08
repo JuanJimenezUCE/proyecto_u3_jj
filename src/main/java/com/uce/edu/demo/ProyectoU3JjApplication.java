@@ -33,7 +33,7 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 		// TODO Auto-generated method stub
 
 		
-		
+		/*
 		LOG.info("INNER JOIN");
 		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaInnerJoin(5);
 		
@@ -68,8 +68,8 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 		for (Factura f : listaHotelesRight) {
 			LOG.info("Factura : " + f.getNumero()+" "+f.getFecha());
 		}
+		*/
 		
-		/*
 		LOG.info("RELACIONAMIENTO WHERE");
 		List<Factura> listaFacturas =this.iFacturaService.buscarFacturaJoinWhere(5);
 		
@@ -90,7 +90,7 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 			
 			}
 		}
-		*/
+		
 	}
 
 }
