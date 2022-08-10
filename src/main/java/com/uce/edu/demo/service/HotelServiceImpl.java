@@ -2,14 +2,20 @@ package com.uce.edu.demo.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.reactive.TransactionSynchronizationManager;
 
+import com.uce.edu.demo.ProyectoU3JjApplication;
 import com.uce.edu.demo.repository.IHotelRepository;
 import com.uce.edu.demo.repository.modelo.Hotel;
 @Service
 public class HotelServiceImpl implements IHotelService{
 
+	private static final Logger LOG = LoggerFactory.getLogger(ProyectoU3JjApplication.class);
+	
 	@Autowired
 	private IHotelRepository iHotelRepository;
 	
@@ -49,8 +55,11 @@ public class HotelServiceImpl implements IHotelService{
 	}
 
 	@Override
+	
 	public List<Hotel> buscarHotelJoinFetch(String tipoHabitacion) {
 		// TODO Auto-generated method stub
+		
+		LOG.info("Transaccion activa: "  + org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
 		return this.iHotelRepository.buscarHotelJoinFetch(tipoHabitacion);
 	}
 
