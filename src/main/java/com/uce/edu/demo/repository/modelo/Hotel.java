@@ -28,7 +28,7 @@ public class Hotel {
 	
 	
 	//@OneToMany(mappedBy="hotel", fetch = FetchType.EAGER)
-	@OneToMany(mappedBy="hotel", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="hotel", fetch = FetchType.EAGER)
 	private List<Habitacion> habitaciones;
 
 	

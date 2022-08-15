@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.uce.edu.demo.ProyectoU3JjApplication;
+import com.uce.edu.demo.repository.modelo.ContadorHabitaciones;
 import com.uce.edu.demo.repository.modelo.Hotel;
 
 @Repository
@@ -109,6 +110,37 @@ public class HotelRepositoryImpl implements IHotelRepository{
 	}
 
 
-
+	@Override
+	public Hotel buscarHotel(String tipo) {
+		TypedQuery<Hotel> myQuery=this.entityManager.createQuery(
+				"SELECT h FROM Hotel h JOIN h.habitaciones ha WHERE ha.tipo= :datoTipo",
+				Hotel.class);
+		myQuery.setParameter("datoTipo", tipo);
+		return myQuery.getSingleResult();
+	}
 	
+	@Override
+	public void insertar(Hotel h) {
+		this.entityManager.persist(h);
+		
+	}
+
+	@Override
+	public Hotel buscar(Integer id) {
+		
+		return this.entityManager.find(Hotel.class, id);
+	}
+
+	@Override
+    public ContadorHabitaciones contarHabitaciones(Integer id, String tipo) {
+        //SELECT h.hote_direccion, ha.habi_tipo, COUNT(ha.habi_tipo) as "No Habitaciones" FROM Hotel h INNER JOIN Habitacion ha  GROUP BY ha.habi_tipo, h.hote_id
+        TypedQuery<ContadorHabitaciones> myQuery=this.entityManager.createQuery(
+                "SELECT NEW com.uce.edu.demo.repository.modelo.ContadorHabitaciones(h.direccion, ha.tipo, COUNT(ha.tipo)) FROM Hotel h JOIN h.habitaciones ha WHERE h.id= :datoId AND ha.tipo= :datoTipo GROUP BY ha.tipo, h.id",
+                ContadorHabitaciones.class);
+        myQuery.setParameter("datoId", id);
+        myQuery.setParameter("datoTipo", tipo);
+        return myQuery.getSingleResult();
+    }
+	
+
 }

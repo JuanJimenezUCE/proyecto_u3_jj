@@ -8,6 +8,13 @@ import com.uce.edu.demo.repository.modelo.Hotel;
 public interface IFacturaRepository {
 
 	
+
+	//CRUD
+	public Factura consultar(Integer id);
+	public void create(Factura f);
+	public void update(Factura f);
+	public void delete(Integer id);
+	
 	public List<Factura> buscarFacturaInnerJoin(Integer cantidad);
 	
 	public List<Factura> buscarFacturaInnerJoin();

@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="detalle")
-public class DetalleFactura {
+public class Detalle {
 
 	@Id
 	@Column(name ="deta_id")
@@ -22,15 +22,19 @@ public class DetalleFactura {
 	@SequenceGenerator(name = "deta_id_seq", sequenceName = "deta_id_seq", allocationSize = 1)
 	private Integer id;
 	
+	@Column(name="deta_nombre")
+	private String nombre;
+	
 	@Column(name ="deta_cantidad")
 	private Integer cantidad;
 	
-	@Column(name ="deta_subtotal")
-	private BigDecimal subtotal;
+	@Column(name ="deta_precio")
+	private BigDecimal precio;
 	
 	@ManyToOne
 	@JoinColumn(name = "deta_fact_id")
 	private Factura factura;
+
 
 	
 	/*
@@ -39,19 +43,23 @@ public class DetalleFactura {
 	private Producto producto;
 	*/
 	
-	
-	@Override
-	public String toString() {
-		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", subtotal=" + subtotal + "]";
-	}
 
 	//GET Y SET
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public Integer getCantidad() {
@@ -62,12 +70,12 @@ public class DetalleFactura {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getSubtotal() {
-		return subtotal;
+	public BigDecimal getPrecio() {
+		return precio;
 	}
 
-	public void setSubtotal(BigDecimal subtotal) {
-		this.subtotal = subtotal;
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
 	}
 
 	public Factura getFactura() {
@@ -77,7 +85,6 @@ public class DetalleFactura {
 	public void setFactura(Factura factura) {
 		this.factura = factura;
 	}
-
 
 	
 	

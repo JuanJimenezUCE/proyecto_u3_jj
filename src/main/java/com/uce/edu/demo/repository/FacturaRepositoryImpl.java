@@ -49,7 +49,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 	public List<Factura> buscarFacturaOuterJoinLeft() {
 		// TODO Auto-generated method stub
 		TypedQuery<Factura> myQuery = this.entityManager
-				.createQuery("SELECT f FROM Factura f  LEFT JOIN f.detalles de ", Factura.class) ;
+				.createQuery("SELECT f FROM Factura f  LEFT JOIN f.detalles de ", Factura.class);
 
 		return myQuery.getResultList();
 	}
@@ -72,7 +72,7 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 				Factura.class);
 		myQuery.setParameter("cantidad", cantidad);
 		return myQuery.getResultList();
-		
+
 	}
 
 	@Override
@@ -82,6 +82,28 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 				"SELECT f FROM Factura f  JOIN FETCH f.detalles de WHERE de.cantidad <: cantidad", Factura.class);
 		myQuery.setParameter("cantidad", cantidad);
 		return myQuery.getResultList();
+	}
+
+	// CRUD----
+	@Override
+	public Factura consultar(Integer id) {
+		return this.entityManager.find(Factura.class, id);
+	}
+
+	@Override
+	public void create(Factura f) {
+		this.entityManager.persist(f);
+	}
+
+	@Override
+	public void update(Factura f) {
+		this.entityManager.merge(f);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		Factura f = this.consultar(id);
+		this.entityManager.remove(f);
 	}
 
 }
