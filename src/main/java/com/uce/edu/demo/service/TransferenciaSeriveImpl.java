@@ -48,6 +48,15 @@ public class TransferenciaSeriveImpl implements ITransferenciaService {
 		trans.setCtaOrigen(ctaOrigen);
 		trans.setCtaDestino(ctaDestino);
 		this.transferenciaRepository.insertar(trans);
+		
+		//if(ctaOrigen.getTipo().equals("Ahorros")) {
+	//		throw new RuntimeException();
+	//	}
+		
+		if(monto.compareTo(saldoOrigen)>0) {
+			throw new RuntimeException();
+		}
+		
 		//commit
 	}
 	@Override

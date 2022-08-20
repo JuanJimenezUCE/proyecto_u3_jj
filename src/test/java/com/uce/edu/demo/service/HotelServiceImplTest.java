@@ -23,7 +23,7 @@ class HotelServiceImplTest {
 		Hotel h2=hotelService.buscarHotel("Suite");
 		assertNotNull(h2);
 	}
-
+	//Test 4
 	@Test
 	void testContarHabitaciones() {
 		   ContadorHabitaciones contador=this.hotelService.contarHabitaciones(3, "Familiar");

@@ -17,7 +17,7 @@ class FacturaRepositoryImplTest {
 
 	@Autowired
 	private IFacturaRepository facturaRepository;
-	
+	//Test 1
 	@Test
 	void testConsultar() {
 			Factura f=new Factura();

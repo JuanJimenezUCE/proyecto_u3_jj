@@ -13,6 +13,7 @@ class HotelRepositoryImplTest {
 	
 	@Autowired
 	private IHotelRepository hotelRepository;
+	//Test 2
 	@Test
 	void testBuscarHotel() {
 		Hotel h=new Hotel();

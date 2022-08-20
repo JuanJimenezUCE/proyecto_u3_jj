@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,11 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 	@Autowired
 	private IHotelService iHotelService;
 
+	@Autowired
+	private ITransferenciaService iTransferenciaService;
+
+	@Autowired
+	private IFacturaService iFacturaService;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU3JjApplication.class, args);
 	}
@@ -27,13 +34,8 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		LOG.info("Trabajo Grupal ");
-		LOG.info("Programacion Avanzada = Grupo 2 ");
-
-            
-        //ContadorHabitaciones c=this.iHotelService.contarHabitaciones(1, "Individual");
-        //LOG.info("HAbitacion"+c);
 	
+		this.iTransferenciaService.realizarTransferencia("131213", "32165", new BigDecimal(1));
 	}
 
 }
