@@ -87,8 +87,8 @@ public class FacturaServiceImpl implements IFacturaService{
 		
 		for(Detalle p: productos) {
 			BigDecimal cantidad=new BigDecimal(p.getCantidad());
-			BigDecimal totalProducto=p.getPrecio().multiply(cantidad);
-			valorFactura=valorFactura.add(totalProducto);
+			//BigDecimal totalProducto=p.getPrecio().multiply(cantidad);
+			//valorFactura=valorFactura.add(totalProducto);
 		}
 		
 		return valorFactura;

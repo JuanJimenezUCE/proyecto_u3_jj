@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -30,8 +32,11 @@ public class Factura {
 	@Column(name ="fact_numero")
 	private String numero;
 	
-	@Column(name="fact_total")
-	private BigDecimal total;
+
+	
+	@ManyToOne
+	@JoinColumn(name = "fact_clie_id")
+	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "factura",fetch= FetchType.EAGER)
 	private List<Detalle> detalles;
@@ -62,13 +67,7 @@ public class Factura {
 		this.numero = numero;
 	}
 
-	public BigDecimal getTotal() {
-		return total;
-	}
 
-	public void setTotal(BigDecimal total) {
-		this.total = total;
-	}
 
 	public List<Detalle> getDetalles() {
 		return detalles;
@@ -76,6 +75,14 @@ public class Factura {
 
 	public void setDetalles(List<Detalle> detalles) {
 		this.detalles = detalles;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

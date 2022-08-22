@@ -33,7 +33,6 @@ public class Transferencia {
 	@JoinColumn(name = "tran_cta_destino")
 	private CuentaBancaria ctaDestino;
 	
-	
 	//GET Y SET
 	public Integer getId() {
 		return id;
