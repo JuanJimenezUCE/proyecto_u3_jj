@@ -55,7 +55,6 @@ public class GestionFacturaServiceImpl implements IGestionFacturaService {
 		
 		BigDecimal total=new BigDecimal(0);
 		
-		Integer nItems=0;
 		
 		for(String p: codigosBarras) {
 			
@@ -74,8 +73,8 @@ public class GestionFacturaServiceImpl implements IGestionFacturaService {
 			detalle.setProducto(producto);
 			detalle.setFactura(factura);
 		    detalle.setSubtotal(producto.getPrecio().multiply(new BigDecimal(detalle.getCantidad())));
-		    this.iFacturaDetalleRepository.insertar(detalle);
-			nItems++;
+		    //this.iFacturaDetalleRepository.insertar(detalle);
+		
 		}
 		
 
@@ -83,7 +82,7 @@ public class GestionFacturaServiceImpl implements IGestionFacturaService {
 		fElectronica.setNumero(numeroFactura);
 		fElectronica.setMonto(total);
 		fElectronica.setFechaCreacion(LocalDateTime.now());
-		fElectronica.setNumeroItems(nItems);
+		fElectronica.setNumeroItems(codigosBarras.size());
 		this.iFacturaElectronicaRepository.insertar(fElectronica);
 		
 		
