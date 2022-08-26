@@ -33,7 +33,7 @@ public class ProyectoU3JjApplication implements CommandLineRunner{
 		codigoBarras.add("1111");
 		codigoBarras.add("2222");
 		
-		this.iGestionFacturaService.generarFactura("1723026900", "1", codigoBarras);
+		this.iGestionFacturaService.generarFactura("1723026900", "3", codigoBarras);
 		//this.iTransferenciaService.realizarTransferencia("131213", "32165", new BigDecimal(1));
 	}
 

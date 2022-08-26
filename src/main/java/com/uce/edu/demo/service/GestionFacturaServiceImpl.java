@@ -23,68 +23,24 @@ import com.uce.edu.demo.repository.modelo.Producto;
 @Service
 public class GestionFacturaServiceImpl implements IGestionFacturaService {
 
-	@Autowired
-	private IProductoRepository iProductoRepository;
 	
 	@Autowired
-	private IClienteRepository iClienteRepository;
+	private IFacturaElectronicaService iFacturaElectronicaService;
 	
 	@Autowired
-	private IFacturaElectronicaRepository iFacturaElectronicaRepository;
+	private IFacturaService iFacturaService;
 	
-	@Autowired
-	private IFacturaRepository iFacturaRepository;
 	
-	@Autowired
-	private IFacturaDetalleRepository iFacturaDetalleRepository;
 	@Override
 	@Transactional(value =TxType.REQUIRED)
 	public void generarFactura(String cedulaCliente, String numeroFactura, List<String> codigosBarras) {
 		// TODO Auto-generated method stub
 		
-		Factura factura = new Factura();
-		factura.setFecha(LocalDateTime.now());
-		factura.setNumero(numeroFactura);
-		
-		Cliente cliente= this.iClienteRepository.buscarPorCedula(cedulaCliente);
-		
-		factura.setCliente(cliente);
-			
-		this.iFacturaRepository.create(factura);
-		
-		
-		BigDecimal total=new BigDecimal(0);
-		
-		
-		for(String p: codigosBarras) {
-			
-			Producto producto= this.iProductoRepository.buscarPorCodigo(p);
-			producto.setStock(producto.getStock()-1);
-			this.iProductoRepository.actualizar(producto);
-			if(producto.getStock()<0) {
-				throw new RuntimeException();
-			}
-		
-			total= producto.getPrecio().add(total);
-			
-			Detalle detalle =new Detalle();
-			
-			detalle.setCantidad(1);
-			detalle.setProducto(producto);
-			detalle.setFactura(factura);
-		    detalle.setSubtotal(producto.getPrecio().multiply(new BigDecimal(detalle.getCantidad())));
-		    //this.iFacturaDetalleRepository.insertar(detalle);
-		
-		}
-		
+	
+		BigDecimal totalPagar = this.iFacturaService.procesarFactura(cedulaCliente, numeroFactura, codigosBarras);
 
-		FacturaElectronica fElectronica =new FacturaElectronica();
-		fElectronica.setNumero(numeroFactura);
-		fElectronica.setMonto(total);
-		fElectronica.setFechaCreacion(LocalDateTime.now());
-		fElectronica.setNumeroItems(codigosBarras.size());
-		this.iFacturaElectronicaRepository.insertar(fElectronica);
-		
+	
+		this.iFacturaElectronicaService.procesarFactElectronica(numeroFactura, codigosBarras.size(), totalPagar);
 		
 	}
 

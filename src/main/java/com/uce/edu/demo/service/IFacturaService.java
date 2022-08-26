@@ -35,4 +35,6 @@ public interface IFacturaService {
 
 	public int cantidad(Integer id);
 
+	
+	 public BigDecimal procesarFactura(String cedulaCliente, String numeroFactura, List<String> codigosBarras);
 }
