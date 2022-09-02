@@ -57,7 +57,7 @@ public class MainInterfacesFuncionales {
 
 		Stream<String> lista2 = listaNum.stream().map(numeros -> {
 			Integer valor = numeros + 1;
-			String cadena = "Numero Impares Decendentes:" + valor.toString();
+			String cadena = "Numero Impares Decendentes: " + valor.toString();
 			return cadena;
 		});
 	

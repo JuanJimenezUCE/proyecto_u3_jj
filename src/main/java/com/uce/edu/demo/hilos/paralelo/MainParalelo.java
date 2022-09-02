@@ -10,36 +10,34 @@ public class MainParalelo {
 		long tiempoInicial = System.currentTimeMillis();
 
 		System.out.println("Nombre Hilo : " + Thread.currentThread().getName());
-		CajeroParalelo cajero1 = new CajeroParalelo("Juan", Arrays.asList("Pepito"/*, "Daniel", "Pedro"*/));
-		CajeroParalelo cajero2 = new CajeroParalelo("Luis", Arrays.asList("Pepito2"/*, "Daniel2"*/));
-		CajeroParalelo cajero3 = new CajeroParalelo("Paul", Arrays.asList("Pepito3"));
+		FabricaParalelo fabrica1 = new FabricaParalelo("Fabricacion telefonos motorola", Arrays.asList("Moto g1"));
+		FabricaParalelo fabrica2 = new FabricaParalelo("Fabricacion telefonos sony", Arrays.asList("MArk 4"));
+		FabricaParalelo fabrica3 = new FabricaParalelo("Fabricacion telefonos apple", Arrays.asList("Iphone 14"));
 		
 		
-		CajeroParalelo cajero4 = new CajeroParalelo("Juan", Arrays.asList( "Juan"));
-		CajeroParalelo cajero5 = new CajeroParalelo("Luis", Arrays.asList( "Juan2"));
-		CajeroParalelo cajero6 = new CajeroParalelo("Paul", Arrays.asList( "Juan3"));
+		FabricaParalelo fabrica4 = new FabricaParalelo("Fabricacion telefonos samsung", Arrays.asList( "S22 Ultra"));
+		FabricaParalelo fabrica5 = new FabricaParalelo("Fabricacion telefonos htc", Arrays.asList( "One m9"));
 
-		// Juan
-		PCCajeroParalelo gestorAtencion = new PCCajeroParalelo(cajero1);
-		gestorAtencion.start();//procesar
-		// Luiis
-		PCCajeroParalelo gestorAtencion2 = new PCCajeroParalelo(cajero2);
-		gestorAtencion2.start();//procesar
-		// Paul
-		PCCajeroParalelo gestorAtencion3 = new PCCajeroParalelo(cajero3);
-		gestorAtencion3.start();//procesar
+
+		PCFabricaParalelo gestorFabricacion = new PCFabricaParalelo(fabrica1);
+		gestorFabricacion.start();//procesar
+
+		PCFabricaParalelo gestorFabricacion2 = new PCFabricaParalelo(fabrica2);
+		gestorFabricacion2.start();//procesar
+
+		PCFabricaParalelo gestorFabricacion3 = new PCFabricaParalelo(fabrica3);
+		gestorFabricacion3.start();//procesar
 		
 		
-		// Juan
-		PCCajeroParalelo gestorAtencion4 = new PCCajeroParalelo(cajero4);
-		gestorAtencion4.start();//procesar
-		// Luiis
-		PCCajeroParalelo gestorAtencion5 = new PCCajeroParalelo(cajero5);
-		gestorAtencion5.start();//procesar
-		// Paul
+	
+		PCFabricaParalelo gestorFabricacion4 = new PCFabricaParalelo(fabrica4);
+		gestorFabricacion4.start();//procesar
+	
+		PCFabricaParalelo gestorFabricacion5 = new PCFabricaParalelo(fabrica5);
+		gestorFabricacion5.start();//procesar
+	
 		
-		PCCajeroParalelo gestorAtencion6 = new PCCajeroParalelo(cajero6);
-		gestorAtencion6.start();//procesar
+	
 		
 		long tiempoFinal = System.currentTimeMillis();
 		long tiempoTrans = (tiempoFinal - tiempoInicial) / 1000;
